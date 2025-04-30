@@ -13,8 +13,8 @@ Due to these rules the following programs are invalid:
 
 ```mermaid
 graph TD;
-    b0-->b1;
-    b0-->b2;
+    b0-->|Then| b1;
+    b0-->|Else| b2;
 ```
 
 Because it violates either rule 1 or rule 2
@@ -22,7 +22,7 @@ Because it violates either rule 1 or rule 2
 
 ```mermaid
 graph TD;
-    b0-->b2;
-    b0-->b1;
-    b1-->b2;
+    b0-->|Then| b2;
+    b0-->|Else| b1;
+    b1-->|Jmp| b2;
 ```
