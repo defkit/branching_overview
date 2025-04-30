@@ -54,6 +54,7 @@ After all this, we termiate each notterminated block with `jmp` to `ReturnBlock`
 
 ## Example
 let instruction_blocks = [Block0, Block1])]
+
 let branching_instructions = [InsertSimpleInstructionBlock(0), InsertIfBlock(0, 1), SwitchToBlock(2), InsertSimpleInstructionBlock(1), InsertJmpBlock(0), InsertReturnBlcok(0)]
 
 after `InsertSimpleInstructionBlock(0)`
