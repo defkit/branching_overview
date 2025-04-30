@@ -26,3 +26,15 @@ graph TD;
     b0-->|Else| b1;
     b1-->|Jmp| b2;
 ```
+Because it viloates rule 3.
+
+And for some reason, the following program is invalid too.
+```mermaid
+graph TD;
+    b0-->|Then| b1;
+    b0-->|Else| b2;
+    b1-->|Then| b2;
+    b1-->|Else| b3;
+    b2-->|Jmp| b3;
+```
+It does not viloate rule 3, but invalid.
