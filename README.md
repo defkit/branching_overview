@@ -62,7 +62,7 @@ graph TD;
     b0[Block0 id=0]
 ```
 
-after `InsertIfBlock`, current block context = 1
+after `InsertIfBlock(0, 1)`, current block context = 1
 ```mermaid
 graph TD;
     b0[Block0 id=0]-->|Then| b1[Block0 id=1]
@@ -92,7 +92,7 @@ graph TD;
     b0[Block0 id=0]-->|Then| b1[Block0 id=1]
     b0[Block0 id=0]-->|Else| b2[Block1 + Block1 id=2]
     b2-->|Jmp| b3[Block0 id=3]
-    b4[Block0 id=4]
+    b4[Block0 id=4 RETURN BLOCK]
 ```
 
 After all the instructions have finished, we terminate each block with jmp
