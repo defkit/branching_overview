@@ -59,14 +59,14 @@ let branching_instructions = [InsertSimpleInstructionBlock(0), InsertIfBlock(0, 
 after `InsertSimpleInstructionBlock(0)`
 ```mermaid
 graph TD;
-    b0[Block0]
+    b0[Block0 id=0]
 ```
 
 after `InsertIfBlock`, current block context = 1
 ```mermaid
 graph TD;
-    b0[Block0]-->|Then| b1[Block0]
-    b0[Block0]-->|Else| b2[Block1]
+    b0[Block0 id=0]-->|Then| b1[Block0 id=1]
+    b0[Block0 id=0]-->|Else| b2[Block1 id=2]
 ```
 
 after `SwitchToBlock(2)`, current block context = 2
@@ -74,35 +74,35 @@ after `SwitchToBlock(2)`, current block context = 2
 after `InsertSimpleInstructionBlock(1)`
 ```mermaid
 graph TD;
-    b0[Block0]-->|Then| b1[Block0]
-    b0[Block0]-->|Else| b2[Block1 + Block1]
+    b0[Block0 id=0]-->|Then| b1[Block0 id=1]
+    b0[Block0 id=0]-->|Else| b2[Block1 + Block1 id=2]
 ```
 
 after `InsertJmpBlock(0)`, current block context = 3
 ```mermaid
 graph TD;
-    b0[Block0]-->|Then| b1[Block0]
-    b0[Block0]-->|Else| b2[Block1 + Block1]
-    b2-->|Jmp| b3[Block0]
+    b0[Block0 id=0]-->|Then| b1[Block0 id=1]
+    b0[Block0 id=0]-->|Else| b2[Block1 + Block1 id=2]
+    b2-->|Jmp| b3[Block0 id=3]
 ```
 
 after `InsertReturnBlcok(0)`
 ```mermaid
 graph TD;
-    b0[Block0]-->|Then| b1[Block0]
-    b0[Block0]-->|Else| b2[Block1 + Block1]
-    b2-->|Jmp| b3[Block0]
-    b4[Block0]
+    b0[Block0 id=0]-->|Then| b1[Block0 id=1]
+    b0[Block0 id=0]-->|Else| b2[Block1 + Block1 id=2]
+    b2-->|Jmp| b3[Block0 id=3]
+    b4[Block0 id=4]
 ```
 
 After all the instructions have finished, we terminate each block with jmp
 The resulting program will look like this:
 ```mermaid
 graph TD;
-    b0[Block0]-->|Then| b1[Block0]
-    b0[Block0]-->|Else| b2[Block1 + Block1]
-    b2-->|Jmp| b3[Block0]
+    b0[Block0 id=0]-->|Then| b1[Block0 id=1]
+    b0[Block0 id=0]-->|Else| b2[Block1 + Block1 id=2]
+    b2-->|Jmp| b3[Block0 id=3]
     b1-->|Jmp| b4
     b3-->|Jmp| b4
-    b4[Block0]
+    b4[Block0 id=4]
 ```
