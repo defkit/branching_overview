@@ -120,5 +120,6 @@ graph TD;
     b3-->|Else| b5[Block0 id=5]
     b4-->|Jmp| b6
     b5-->|Jmp| b6
+    b1-->|Jmp| b6
     b6[Block0 id=6 RETURN BLOCK]
 ```
