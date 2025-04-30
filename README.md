@@ -54,10 +54,55 @@ After all this, we termiate each notterminated block with `jmp` to `ReturnBlock`
 
 ## Example
 let instruction_blocks = [Block0, Block1])]
-let branching_instructions = [InsertSimpleInstructionBlock(0), InsertIfBlock(0, 1), SwitchToBlock(2), InsertSimpleInstructionBlock(1), InsertJmpBlock(0)]
+let branching_instructions = [InsertSimpleInstructionBlock(0), InsertIfBlock(0, 1), SwitchToBlock(2), InsertSimpleInstructionBlock(1), InsertJmpBlock(0), InsertReturnBlcok(0)]
 
 after `InsertSimpleInstructionBlock(0)`
 ```mermaid
 graph TD;
     b0[Block0]
+```
+
+after `InsertIfBlock`, current block context = 1
+```mermaid
+graph TD;
+    b0[Block0]-->|Then| b1[Block0]
+    b0[Block0]-->|Else| b2[Block1]
+```
+
+after `SwitchToBlock(2)`, current block context = 2
+
+after `InsertSimpleInstructionBlock(1)`
+```mermaid
+graph TD;
+    b0[Block0]-->|Then| b1[Block0]
+    b0[Block0]-->|Else| b2[Block1 + Block1]
+```
+
+after `InsertJmpBlock(0)`, current block context = 3
+```mermaid
+graph TD;
+    b0[Block0]-->|Then| b1[Block0]
+    b0[Block0]-->|Else| b2[Block1 + Block1]
+    b2-->|Jmp| b3[Block0]
+```
+
+after `InsertReturnBlcok(0)`
+```mermaid
+graph TD;
+    b0[Block0]-->|Then| b1[Block0]
+    b0[Block0]-->|Else| b2[Block1 + Block1]
+    b2-->|Jmp| b3[Block0]
+    b4[Block0]
+```
+
+After all the instructions have finished, we terminate each block with jmp
+The resulting program will look like this:
+```mermaid
+graph TD;
+    b0[Block0]-->|Then| b1[Block0]
+    b0[Block0]-->|Else| b2[Block1 + Block1]
+    b2-->|Jmp| b3[Block0]
+    b1-->|Jmp| b4
+    b3-->|Jmp| b4
+    b4[Block0]
 ```
